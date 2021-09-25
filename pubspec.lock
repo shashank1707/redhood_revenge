@@ -85,13 +85,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0-releasecandidate.13"
-  flame_forge2d:
+  flame_splash_screen:
     dependency: "direct main"
     description:
-      name: flame_forge2d
+      name: flame_splash_screen
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.3-releasecandidate.12"
+    version: "0.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -107,13 +107,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  forge2d:
-    dependency: transitive
-    description:
-      name: forge2d
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.3"
   google_fonts:
     dependency: "direct main"
     description:

@@ -4,15 +4,13 @@ import 'package:flame/flame.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
-import 'package:flame/gestures.dart';
-import 'package:flame/palette.dart';
-import 'package:flame/parallax.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/geometry.dart';
 import 'package:flutter/material.dart';
-import 'package:red_hood_revenge/components/flatTile.dart';
 import 'package:red_hood_revenge/components/obstacle.dart';
 import 'package:red_hood_revenge/game/redHoodGame.dart';
+import 'package:red_hood_revenge/widgets/hud.dart';
+import 'package:red_hood_revenge/widgets/retryMenu.dart';
 
 class RedHood extends SpriteAnimationComponent
     with HasGameRef<RedHoodGame>, Hitbox, Collidable {
@@ -22,9 +20,11 @@ class RedHood extends SpriteAnimationComponent
   late SpriteAnimation attackAnimation1;
   late SpriteAnimation attackAnimation2;
   late SpriteAnimation hurtAnimation;
+  late SpriteAnimation sitAnimation;
 
   late double heroSpeedX = 0;
   late double heroSpeedY = 0;
+  late double maxSpeed = 0;
   late double yMax = 0;
   late double yCenter = 0;
   late double gravity = 1000;
@@ -34,6 +34,7 @@ class RedHood extends SpriteAnimationComponent
   late bool isRunning = false;
   late bool isJumping = false;
   late bool isHurting = false;
+  late bool stopUpdates = false;
   late bool inAir = false;
   late Timer _timer;
   late Timer hurtTimer;
@@ -45,7 +46,13 @@ class RedHood extends SpriteAnimationComponent
   @override
   Future<void> onLoad() async {
     // debugMode = true;
+    await loadSprites();
+    await setSize(gameRef.canvasSize);
+    setTimers();
+    this.maxSpeed = 200;
+  }
 
+  Future<void> loadSprites() async {
     final idleImage = await Flame.images.load('Heros/redhood/redhood_idle.png');
     final runImage = await Flame.images.load('Heros/redhood/redhood_run.png');
     final jumpImage = await Flame.images.load('Heros/redhood/redhood_jump.png');
@@ -65,19 +72,11 @@ class RedHood extends SpriteAnimationComponent
         .createAnimation(row: 0, stepTime: 0.05, from: 15, to: 24);
     hurtAnimation = SpriteSheet(image: hurtImage, srcSize: Vector2(60, 80))
         .createAnimation(row: 0, stepTime: 0.05, from: 0, to: 4);
+    sitAnimation = SpriteSheet(image: hurtImage, srcSize: Vector2(60, 80))
+        .createAnimation(row: 0, stepTime: 0.025, from: 5, to: 6);
 
     this.animation = idleAnimation;
     this.anchor = Anchor.center;
-
-    _timer = Timer(0.45, callback: () {
-      this.animation = idleAnimation;
-      this.isAttacking = false;
-      this.hasAttacked = false;
-    });
-
-    hurtTimer = Timer(0.15, callback: (){
-      this.isHurting = false;
-    });
 
     var shape = HitboxPolygon([
       Vector2(-0.5, -0.5),
@@ -89,51 +88,78 @@ class RedHood extends SpriteAnimationComponent
     this.addShape(shape);
   }
 
-  @override
-  void onGameResize(Vector2 gameSize) {
+  Future<void> setSize(Vector2 gameSize) async {
     super.onGameResize(gameSize);
     this.height = gameSize.x / 5;
     this.width = gameSize.x / 6.66;
-    this.x = 700;
-    gameRef.nightParallax.x = 700 - gameSize.x / 2;
+    this.x = 750;
+    gameRef.parallaxComponent.x = 750 - gameSize.x / 2;
     this.y = gameRef.canvasSize.y / 2;
     this.yMax = this.y;
     this.yCenter = this.y;
     this.hitBox = Vector2(this.height / 4, this.height / 4);
   }
 
+  void setTimers() {
+    _timer = Timer(0.45, callback: () {
+      this.animation = idleAnimation;
+      this.isAttacking = false;
+      this.hasAttacked = false;
+      this.hasAttacked = false;
+    });
+
+    hurtTimer = Timer(0.15, callback: () {
+      this.isHurting = false;
+    });
+  }
+
   @override
   void update(double dt) {
     super.update(dt);
-    this.x += heroSpeedX * dt;
 
-    gameRef.nightParallax.x += heroSpeedX * dt;
-    gameRef.nightParallax.parallax!.baseVelocity.x = heroSpeedX * dt * 10;
+    if (!stopUpdates) {
+      this.x += heroSpeedX * dt;
 
-    // v = u + at;
-    this.heroSpeedY += gravity * dt;
+      gameRef.parallaxComponent.x += heroSpeedX * dt;
+      gameRef.parallaxComponent.parallax!.baseVelocity.x = heroSpeedX * dt * 10;
 
-    // d = si + s * t
-    this.y += this.heroSpeedY * dt;
-    gameRef.nightParallax.y += this.heroSpeedY * dt;
+      // v = u + at;
+      this.heroSpeedY += gravity * dt;
 
-    if (isOnGround()) {
-      this.y = this.yMax;
-      this.heroSpeedY = 0;
-      gameRef.nightParallax.y = this.y - this.yCenter;
-      this.isJumping = false;
+      // d = si + s * t
+      this.y += this.heroSpeedY * dt;
+      gameRef.parallaxComponent.y += this.heroSpeedY * dt;
+
+      if (isOnGround()) {
+        this.y = this.yMax;
+        this.heroSpeedY = 0;
+        gameRef.parallaxComponent.y = this.y - this.yCenter;
+        this.isJumping = false;
+      }
+
+      if (isOnGround() &&
+          !this.isRunning &&
+          !this.isAttacking &&
+          !this.isHurting) {
+        this.stopMoving();
+      }
+
+      if (!this.isAttacking && this.isHurting) {
+        this.animation = hurtAnimation;
+      }
+
+      if (!this.isJumping && this.isRunning && !this.isAttacking) {
+        this.animation = runAnimation;
+      }
+    }else{
+      this.animation = sitAnimation;
     }
 
-    if (isOnGround() && !this.isRunning && !this.isAttacking && !this.isHurting) {
-      this.stopMoving();
-    }
-
-    if (!this.isAttacking && this.isHurting) {
-      this.animation = hurtAnimation;
-    }
-
-    if (!this.isJumping && this.isRunning && !this.isAttacking) {
-      this.animation = runAnimation;
+    if(this.health.value <= 0){
+      this.stopUpdates = true;
+      gameRef.overlays.remove(Hud.id);
+      this.animation = sitAnimation;
+      gameRef.overlays.add(RetryMenu.id);
     }
 
     _timer.update(dt);
@@ -145,7 +171,7 @@ class RedHood extends SpriteAnimationComponent
     if (!this.isJumping) {
       this.animation = runAnimation;
     }
-    this.heroSpeedX = 200;
+    this.heroSpeedX = this.maxSpeed;
     isRunning = true;
   }
 
@@ -154,7 +180,7 @@ class RedHood extends SpriteAnimationComponent
     if (!this.isJumping) {
       this.animation = runAnimation;
     }
-    this.heroSpeedX = -200;
+    this.heroSpeedX = -1*this.maxSpeed;
     isRunning = true;
   }
 
@@ -205,12 +231,12 @@ class RedHood extends SpriteAnimationComponent
         if (other.x < this.x) {
           this.heroSpeedX = 0;
           this.x += 5;
-          gameRef.nightParallax.x += 5;
+          gameRef.parallaxComponent.x += 5;
         }
         if (other.x > this.x) {
           this.heroSpeedX = 0;
           this.x -= 5;
-          gameRef.nightParallax.x -= 5;
+          gameRef.parallaxComponent.x -= 5;
         }
       } else {
         if (!isOnGround()) {

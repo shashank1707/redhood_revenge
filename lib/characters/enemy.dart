@@ -1,20 +1,14 @@
-import 'dart:math' as math;
-import 'dart:ui';
-
 import 'package:flame/flame.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flame/geometry.dart';
-import 'package:flame/gestures.dart';
-import 'package:flame/palette.dart';
-import 'package:flame/parallax.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:red_hood_revenge/characters/redHood.dart';
 import 'package:red_hood_revenge/game/redHoodGame.dart';
 
-enum EnemyType { Eye, Skeleton, Goblin }
+enum EnemyType { Eye, Skeleton, Goblin, Mushroom }
 
 class ImageData {
   final imagePath;
@@ -106,8 +100,8 @@ class Enemy extends SpriteAnimationComponent
             to: 4,
             from: 0,
             srcSize: Vector2(150, 150)),
-        enemyHPRate: 0.351,
-        enemyDamage: 0.05,
+        enemyHPRate: 0.251,
+        enemyDamage: 0.051,
         enemySpeed: 75.0),
     EnemyType.Goblin: EnemyData(
         idleImageData: ImageData(
@@ -135,9 +129,9 @@ class Enemy extends SpriteAnimationComponent
             to: 4,
             from: 0,
             srcSize: Vector2(150, 150)),
-        enemyHPRate: 0.21,
-        enemyDamage: 0.10,
-        enemySpeed: 75.0),
+        enemyHPRate: 0.101,
+        enemyDamage: 0.151,
+        enemySpeed: 100.0),
     EnemyType.Skeleton: EnemyData(
         idleImageData: ImageData(
             imagePath: 'Enemies/skeleton/skeleton_idle.png',
@@ -164,8 +158,37 @@ class Enemy extends SpriteAnimationComponent
             to: 4,
             from: 0,
             srcSize: Vector2(150, 150)),
-        enemyHPRate: 0.15,
+        enemyHPRate: 0.101,
         enemyDamage: 0.151,
+        enemySpeed: 100.0),
+    EnemyType.Mushroom: EnemyData(
+        idleImageData: ImageData(
+            imagePath: 'Enemies/mushroom/mush_idle.png',
+            to: 4,
+            from: 0,
+            srcSize: Vector2(150, 150)),
+        runImageData: ImageData(
+            imagePath: 'Enemies/mushroom/mush_run.png',
+            to: 8,
+            from: 0,
+            srcSize: Vector2(150, 150)),
+        attackImageData: ImageData(
+            imagePath: 'Enemies/mushroom/mush_attack.png',
+            to: 8,
+            from: 0,
+            srcSize: Vector2(150, 150)),
+        deathImageData: ImageData(
+            imagePath: 'Enemies/mushroom/mush_death.png',
+            to: 4,
+            from: 0,
+            srcSize: Vector2(150, 150)),
+        hurtImageData: ImageData(
+            imagePath: 'Enemies/mushroom/mush_hurt.png',
+            to: 4,
+            from: 0,
+            srcSize: Vector2(150, 150)),
+        enemyHPRate: 0.251,
+        enemyDamage: 0.051,
         enemySpeed: 75.0)
   };
 
@@ -272,7 +295,9 @@ class Enemy extends SpriteAnimationComponent
     deathTimer = Timer(0.40, callback: () {
       this.stopUpdates = true;
       this.animation = deadAnimation;
+      gameRef.enemiesRemaining.value -= 1;
     });
+    this.renderFlipX = true;
   }
 
   @override
@@ -296,7 +321,7 @@ class Enemy extends SpriteAnimationComponent
       findRedhood();
       checkIfHit();
     } else {
-      if(this.distance(gameRef.redHoodComponent) > 500){
+      if (this.distance(gameRef.redHoodComponent) > 500) {
         this.remove();
       }
     }
@@ -347,15 +372,6 @@ class Enemy extends SpriteAnimationComponent
       this.isAttacking = true;
       this.animation = attackAnimation;
       attackTimer.start();
-      // await Future.delayed(Duration(milliseconds: 600)).then((value) {
-      // if (!gameRef.redHoodComponent.isAttacking && this.stillColliding) {
-      //   gameRef.redHoodComponent.health.value -= this.enemyDamage;
-      //   gameRef.redHoodComponent.animation =
-      //       gameRef.redHoodComponent.hurtAnimation;
-      //   gameRef.redHoodComponent.isHurting = true;
-      //   gameRef.redHoodComponent.hurtTimer.start();
-      // }
-      // });
     }
   }
 
@@ -386,9 +402,13 @@ class Enemy extends SpriteAnimationComponent
   void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
     super.onCollision(intersectionPoints, other);
     if (other is RedHood) {
-      this.stillColliding = true;
-      attack();
-      // this.enemyCurrentSpeed = gameRef.redHoodComponent.heroSpeedX + 5;
+      if (!this.stopUpdates) {
+        this.stillColliding = true;
+        attack();
+      }else{
+        this.stillColliding = false;
+        this.animation = deadAnimation;
+      }
     }
   }
 
