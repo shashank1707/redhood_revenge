@@ -27,10 +27,10 @@ class _DialoguesSet5State extends State<DialoguesSet5> {
   };
 
   List<Map<String, String>> dialogueList = [
-    {"character": "Redhood", "dialogue": "I found the Blood potion but Health potion was not there."},
-    {"character": "Wizard", "dialogue": "WHAT?? You didn't find the Health potion. I really needed that potion for a long time."},
+    {"character": "Redhood", "dialogue": "I found the Blood potion. But Health potion was nowhere around."},
+    {"character": "Wizard", "dialogue": "WHAT?? How could that be? It was really important for me to carry on my work."},
     {"character": "Redhood", "dialogue": "What do you mean?"},
-    {"character": "Wizard", "dialogue": "Nevermind. I think the skeletons has captured the Health potion. You will find it in the skeleton dungeon."},
+    {"character": "Wizard", "dialogue": "Nevermind. I think the Skeleton has captured the Health potion. You will have to go to the skeleton dungeon to find it."},
   ];
 
   @override

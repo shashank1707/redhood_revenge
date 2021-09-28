@@ -27,9 +27,10 @@ class _DialoguesSet6State extends State<DialoguesSet6> {
   };
 
   List<Map<String, String>> dialogueList = [
-    {"character": "Redhood", "dialogue": ""},
-    {"character": "Wizard", "dialogue": ""},
-    {"character": "Redhood", "dialogue": ""},
+    {"character": "Redhood", "dialogue": "Here you go."},
+    {"character": "Wizard", "dialogue": "Delightful! Now for the final potion, you'll have to go to the Rainforest."},
+    {"character": "Wizard", "dialogue": "Be careful though, this can be harder than you think."},
+    {"character": "Redhood", "dialogue": "I will."},
   ];
 
   @override

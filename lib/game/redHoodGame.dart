@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:flame/components.dart';
@@ -15,12 +14,17 @@ import 'package:red_hood_revenge/characters/redHood.dart';
 import 'package:red_hood_revenge/characters/tempRedhood.dart';
 import 'package:red_hood_revenge/characters/warrior.dart';
 import 'package:red_hood_revenge/characters/wizard.dart';
+import 'package:red_hood_revenge/components/bluePotion.dart';
+import 'package:red_hood_revenge/components/greenPotion.dart';
+import 'package:red_hood_revenge/components/heart.dart';
 import 'package:red_hood_revenge/components/levelFour.dart';
 import 'package:red_hood_revenge/components/levelSix.dart';
 import 'package:red_hood_revenge/components/levelTwo.dart';
 import 'package:red_hood_revenge/components/levelZero.dart';
 import 'package:red_hood_revenge/components/levelOne.dart';
 import 'package:red_hood_revenge/components/obstacle.dart';
+import 'package:red_hood_revenge/components/purplePotion.dart';
+import 'package:red_hood_revenge/components/redPotion.dart';
 import 'package:red_hood_revenge/widgets/dialogues/diaSet1.dart';
 import 'package:red_hood_revenge/widgets/dialogues/diaSet2.dart';
 import 'package:red_hood_revenge/widgets/dialogues/diaSet3.dart';
@@ -35,7 +39,6 @@ import 'package:red_hood_revenge/widgets/pauseMenu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
-  
   late bool visible = false;
 
   late int currentLevel = 0;
@@ -104,11 +107,11 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
 
   late ValueNotifier<int> enemiesRemaining = ValueNotifier(1);
 
-  RedHoodGame(currentLevel){
+  RedHoodGame(currentLevel) {
     this.currentLevel = currentLevel;
   }
 
-   @override
+  @override
   void lifecycleStateChange(AppLifecycleState state) {
     super.lifecycleStateChange(state);
     switch (state) {
@@ -125,7 +128,6 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
         break;
     }
   }
-
 
   @override
   Future<void> onLoad() async {
@@ -154,7 +156,7 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
 
   void loadLevel(level) {
     this.shouldLoadZero = false;
-    switch(level){
+    switch (level) {
       case 0:
         this.shouldLoadZero = true;
         loadLevelZero();
@@ -189,7 +191,9 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
   @override
   void update(double dt) {
     super.update(dt);
-    if (shouldLoadZero && !this.loadedLevelZero && this.warriorComponent.x > 0.0 ) {
+    if (shouldLoadZero &&
+        !this.loadedLevelZero &&
+        this.warriorComponent.x > 0.0) {
       this.loadedLevelZero = true;
       this.visible = true;
       overlays.add(FadeAnimation.id);
@@ -210,7 +214,7 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
     if (this.loadedLevelSeven && !completedLevelSeven) {
       runLevelSevenScript();
     }
-    if(this.loadedLevelEight && !completedLevelEight){
+    if (this.loadedLevelEight && !completedLevelEight) {
       runLevelEightScript();
     }
   }
@@ -241,6 +245,12 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
         break;
       case 2:
         components.removeAll([redHoodComponent, levelTwo, levelTwoFiller]);
+        components.whereType<RedPotion>().forEach((element) {
+          element.remove();
+        });
+        components.whereType<Heart>().forEach((element) {
+          element.remove();
+        });
         this.completedLevelTwo = true;
         break;
       case 3:
@@ -250,6 +260,12 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
         break;
       case 4:
         components.removeAll([redHoodComponent, levelFour, levelFourFiller]);
+        components.whereType<GreenPotion>().forEach((element) {
+          element.remove();
+        });
+        components.whereType<Heart>().forEach((element) {
+          element.remove();
+        });
         this.completedLevelFour = true;
         break;
       case 5:
@@ -259,6 +275,12 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
         break;
       case 6:
         components.removeAll([redHoodComponent, levelSix, levelSixFiller]);
+        components.whereType<PurplePotion>().forEach((element) {
+          element.remove();
+        });
+        components.whereType<Heart>().forEach((element) {
+          element.remove();
+        });
         this.completedLevelSix = true;
         break;
       case 7:
@@ -274,12 +296,15 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
           levelZero,
           levelZeroFiller
         ]);
+        components.whereType<BluePotion>().forEach((element) {
+          element.remove();
+        });
         this.completedLevelEight = true;
         break;
     }
   }
 
-  void removeEverythingAndRestart(){
+  void removeEverythingAndRestart() {
     this.visible = false;
     components.whereType<ObstacleTile>().forEach((element) {
       element.remove();
@@ -303,6 +328,12 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
         break;
       case 2:
         components.removeAll([redHoodComponent, levelTwo, levelTwoFiller]);
+        components.whereType<RedPotion>().forEach((element) {
+          element.remove();
+        });
+        components.whereType<Heart>().forEach((element) {
+          element.remove();
+        });
         break;
       case 3:
         components.removeAll(
@@ -310,7 +341,12 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
         break;
       case 4:
         components.removeAll([redHoodComponent, levelFour, levelFourFiller]);
-        this.completedLevelFour = true;
+        components.whereType<GreenPotion>().forEach((element) {
+          element.remove();
+        });
+        components.whereType<Heart>().forEach((element) {
+          element.remove();
+        });
         break;
       case 5:
         components.removeAll(
@@ -318,6 +354,12 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
         break;
       case 6:
         components.removeAll([redHoodComponent, levelSix, levelSixFiller]);
+        components.whereType<PurplePotion>().forEach((element) {
+          element.remove();
+        });
+        components.whereType<Heart>().forEach((element) {
+          element.remove();
+        });
         break;
       case 7:
         components.removeAll(
@@ -331,6 +373,9 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
           levelZero,
           levelZeroFiller
         ]);
+        components.whereType<BluePotion>().forEach((element) {
+          element.remove();
+        });
         break;
     }
     loadLevel(this.currentLevel);
@@ -789,7 +834,8 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
     wizardComponent.renderFlipX = true;
     add(wizardComponent);
 
-    this.changePriorities({redHoodComponent: 10, nightBorne2Component: 9, wizardComponent: 11});
+    this.changePriorities(
+        {redHoodComponent: 10, nightBorne2Component: 9, wizardComponent: 11});
 
     this.visible = true;
     overlays.add(Hud.id);
@@ -802,16 +848,15 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
   }
 
   void runLevelEightScript() {
-    if(!diaSet9 && this.redHoodComponent.x > 0){
-      if(this.redHoodComponent.distance(this.nightBorne2Component) < 300){
+    if (!diaSet9 && this.redHoodComponent.x > 0) {
+      if (this.redHoodComponent.distance(this.nightBorne2Component) < 300) {
         this.diaSet9 = true;
         this.redHoodComponent.stopMoving();
         overlays.remove(Hud.id);
-        overlays.add(DialoguesSet9.id); 
+        overlays.add(DialoguesSet9.id);
       }
     }
   }
-
 
   @override
   void render(Canvas canvas) {

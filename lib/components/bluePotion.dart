@@ -28,7 +28,7 @@ class BluePotion extends SpriteComponent
     super.onCollision(intersectionPoints, other);
     if (other is RedHood) {
       gameRef.redHoodComponent.maxSpeed = 350;
-      gameRef.nightBorne2Component.enemyHPRate = 0.15;
+      gameRef.nightBorne2Component.enemyHPRate = 0.101;
       gameRef.redHoodComponent.health.value = 1;
       gameRef.tookBluePotion = true;
       this.remove();

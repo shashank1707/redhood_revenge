@@ -332,6 +332,7 @@ class Enemy extends SpriteAnimationComponent
         gameRef.redHoodComponent.y >= this.y - this.hitBox.y / 2 &&
         this.stillColliding &&
         !this.isHurting) {
+      this.stopMoving();
       gameRef.redHoodComponent.hasAttacked = false;
       this.enemyHP -= this.enemyHPRate;
       this.animation = hurtAnimation;

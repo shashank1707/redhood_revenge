@@ -100,7 +100,7 @@ class Hud extends StatelessWidget {
                       valueListenable: gameRef.enemiesRemaining,
                       builder: (__, int value, _) {
                         return Container(
-                          child: Text(value.toString() + " Enemies Remaining", style: TextStyle(color: Colors.white),),
+                          child: Text(value.toString() + (value <= 1 ? " Enemy Remaining" : " Enemies Remaining"), style: TextStyle(color: Colors.white),),
                         );
                       }),
                 ),

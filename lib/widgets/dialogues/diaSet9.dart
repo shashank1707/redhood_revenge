@@ -27,8 +27,10 @@ class _DialoguesSet9State extends State<DialoguesSet9> {
   };
 
   List<Map<String, String>> dialogueList = [
-    {"character": "Warrior", "dialogue": ""},
-    {"character": "Wizard", "dialogue": ""},
+    {"character": "NightBorne", "dialogue": "What do you want kid?"},
+    {"character": "Redhood", "dialogue": "You took everything from me."},
+    {"character": "NightBorne", "dialogue": "I don't even know who you are..."},
+    {"character": "Redhood", "dialogue": "Classic."},
   ];
 
   @override

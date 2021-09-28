@@ -27,14 +27,14 @@ class _DialoguesSet3State extends State<DialoguesSet3> {
   };
 
   List<Map<String, String>> dialogueList = [
-    {"character": "Redhood", "dialogue": "Dad, What happened?"},
+    {"character": "Redhood", "dialogue": "FATHER !!!"},
     {"character": "Redhood", "dialogue": "Who did this to you?"},
-    {"character": "Wizard", "dialogue": "It was NightBorne"},
+    {"character": "Wizard", "dialogue": "It was NightBorne."},
     {"character": "Wizard", "dialogue": "Your father didn't know that NightBorne has already acquired the immortality potion."},
-    {"character": "Redhood", "dialogue": "Where is he? Tell me!"},
-    {"character": "Wizard", "dialogue": "It is not so easy to defeat NightBorne."},
-    {"character": "Redhood", "dialogue": "Will you help me?"},
-    {"character": "Wizard", "dialogue": "Meet me in the morning near the hills."},
+    {"character": "Redhood", "dialogue": "Where is he? I've got to find him, I've got to avenge my father."},
+    {"character": "Wizard", "dialogue": "NightBorne is no weakling. And now that he has the immortality potion, there's nothing you can do to defeat him."},
+    {"character": "Redhood", "dialogue": "But I've got to do what needs to be done. Teach me. Teach me how to defeat him."},
+    {"character": "Wizard", "dialogue": "Meet me in the morning near the old broken tree trunk."},
   ];
 
   @override

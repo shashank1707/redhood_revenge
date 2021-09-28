@@ -29,7 +29,7 @@ class _DialoguesSet2State extends State<DialoguesSet2> {
   List<Map<String, String>> dialogueList = [
     {"character": "NightBorne", "dialogue": "Looking for me?"},
     {"character": "Warrior", "dialogue": "NightBorne! I will not let you acquire the immortality potion."},
-    {"character": "NightBorne", "dialogue": "Then show me what you've got."},
+    {"character": "NightBorne", "dialogue": "HAHAHA...! Try and stop me."},
   ];
 
   @override

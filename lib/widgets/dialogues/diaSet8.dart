@@ -26,12 +26,18 @@ class _DialoguesSet8State extends State<DialoguesSet8> {
   };
 
   List<Map<String, String>> dialogueList = [
-    {"character": "Redhood", "dialogue": ""},
-    {"character": "Wizard", "dialogue": ""},
-    {"character": "Redhood", "dialogue": ""},
-    {"character": "Redhood", "dialogue": ""},
-    {"character": "Wizard", "dialogue": ""},
-    {"character": "Redhood", "dialogue": ""},
+    {"character": "Redhood", "dialogue": "(Grunts) AHH!! What's happening? I can't move."},
+    {"character": "Wizard", "dialogue": "It must be the potion. Each and every one of your organs is frozen in its place, except for your head of course."},
+    {"character": "NightBorne", "dialogue": "You're not a bad fighter for a girl, kid. But now that I'm about to end your life, tell me - why did you come here tonight?"},
+    {"character": "Redhood", "dialogue": "I'm your worst nightmare."},
+    {"character": "NightBorne", "dialogue": "Too Bad! I don't have nightmares. I create them."},
+    {"character": "Redhood", "dialogue": "You killed him. You killed my father. You hideous, wicked creature."},
+    {"character": "NightBorne", "dialogue": "HAHAHA...!! You're so naive. That wizard friend of yours?"},
+    {"character": "NightBorne", "dialogue": "He is the one who ordered me to kill your father."},
+    {"character": "NightBorne", "dialogue": "HE IS the reason I'm so powerful today."},
+    {"character": "Redhood", "dialogue": "WHAT? But I- The potions-"},
+    {"character": "NightBorne", "dialogue": "Ahh Yes, the potions. Thanks to you, he will now rule this planet."},
+    {"character": "NightBorne", "dialogue": "I've heard this potion is detrimental, it messes up your brain - You forget who you are, you forget where you belong, you forget why you exist."},
   ];
 
   @override

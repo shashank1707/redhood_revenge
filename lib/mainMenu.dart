@@ -33,7 +33,7 @@ class _MainMenuState extends State<MainMenu> {
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: ElevatedButton(onPressed: (){
-                  Navigator.push(context, CupertinoPageRoute(builder: (context) => SelectSavedGame()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SelectSavedGame()));
                 }, child: Text('Play', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30,),), style: ElevatedButton.styleFrom(
                                 primary: Colors.white),),
               ),
@@ -107,7 +107,7 @@ class _SelectSavedGameState extends State<SelectSavedGame> {
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: ElevatedButton(onPressed: (){
-                  Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => MyGameWidget(0)));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyGameWidget(0)));
                 }, child: Text('New Game', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30,),), style: ElevatedButton.styleFrom(
                                 primary: Colors.white),),
               ),

@@ -216,6 +216,7 @@ class NightBorne2 extends SpriteAnimationComponent
         gameRef.redHoodComponent.y >= this.y - this.hitBox.y / 2 &&
         this.stillColliding &&
         !this.isHurting) {
+          this.stopMoving();
       gameRef.redHoodComponent.hasAttacked = false;
       this.enemyHealth.value -= this.enemyHPRate;
       this.animation = hurtAnimation;
@@ -223,9 +224,9 @@ class NightBorne2 extends SpriteAnimationComponent
       this.hurtTimer.start();
 
       if (gameRef.redHoodComponent.x < this.x) {
-        this.x += this.hitBox.x / 8;
+        this.x += this.hitBox.x / 4;
       } else {
-        this.x -= this.hitBox.x / 8;
+        this.x -= this.hitBox.x / 4;
       }
     }
   }

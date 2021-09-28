@@ -27,12 +27,14 @@ class _DialoguesSet7State extends State<DialoguesSet7> {
   };
 
   List<Map<String, String>> dialogueList = [
-    {"character": "Redhood", "dialogue": ""},
-    {"character": "Wizard", "dialogue": ""},
-    {"character": "Redhood", "dialogue": ""},
-    {"character": "Redhood", "dialogue": ""},
-    {"character": "Wizard", "dialogue": ""},
-    {"character": "Redhood", "dialogue": ""},
+    {"character": "Redhood", "dialogue": "Here's the final potion. What's next?"},
+    {"character": "Wizard", "dialogue": "It's time that you get your revenge. Tonight, you'll face NightBorne - You'll FIGHT him."},
+    {"character": "Redhood", "dialogue": "What about the potion?"},
+    {"character": "Wizard", "dialogue": "I'll prepare it, and bring it to you when you face him."},
+    {"character": "Wizard", "dialogue": "NightBorne is very powerful. He can kill you within seconds."},
+    {"character": "Wizard", "dialogue": "The only key to defeat him is speed. You will have to dodge his attacks before attacking him."},
+    {"character": "Wizard", "dialogue": "The potion will increase your speed and health. And the immortality potion will not work near you after you consume that ultimate potion."},
+    {"character": "Redhood", "dialogue": "Okay... Let's do this."},
   ];
 
   @override

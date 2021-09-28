@@ -27,13 +27,13 @@ class _DialoguesSet4State extends State<DialoguesSet4> {
   };
 
   List<Map<String, String>> dialogueList = [
-    {"character": "Redhood", "dialogue": "How can I defeat NightBorne?"},
+    {"character": "Redhood", "dialogue": "I'm here. When do we start?"},
     {"character": "Wizard", "dialogue": "I will have to make a potion to revert the effects of the immortality potion."},
-    {"character": "Wizard", "dialogue": "For that I need three different potions. Blood potion, Health potion and the Power potion."},
-    {"character": "Redhood", "dialogue": "I will bring them for you."},
-    {"character": "Wizard", "dialogue": "The path is very dangerous."},
-    {"character": "Redhood", "dialogue": "I am ready face every danger"},
-    {"character": "Wizard", "dialogue": "You will find the Blood and Health potions in the Algae Forest. It is guarded by the Goblin."},
+    {"character": "Wizard", "dialogue": "For that I'll need three different potions. The Blood potion, the Health potion and the Power potion."},
+    {"character": "Redhood", "dialogue": "I can bring them to you. Where'd I have to look for them?"},
+    {"character": "Wizard", "dialogue": "I'll tell you. But beware... The path you'll have to follow will be very dangerous."},
+    {"character": "Redhood", "dialogue": "My will to avenge my father's death is stronger than any challenge that path can throw at me. I'm ready."},
+    {"character": "Wizard", "dialogue": "You will find the Blood and Health potions inside the Algae Forest, the one that is guarded by the Goblin."},
   ];
 
   @override

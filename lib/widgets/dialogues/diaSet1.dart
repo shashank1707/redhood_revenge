@@ -27,8 +27,8 @@ class _DialoguesSet1State extends State<DialoguesSet1> {
   };
 
   List<Map<String, String>> dialogueList = [
-    {"character": "Warrior", "dialogue": "I shouldn't have come here alone. It is too dangerous!"},
-    {"character": "Warrior", "dialogue": "But I have to find the immortality potion before NightBorne does."},
+    {"character": "Warrior", "dialogue": "I shouldn't have come here alone. It seems too dangerous!"},
+    {"character": "Warrior", "dialogue": "But I have to find the immortality potion before NightBorne does, at any cost."},
   ];
 
   @override
