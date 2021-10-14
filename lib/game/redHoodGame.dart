@@ -7,6 +7,8 @@ import 'package:flame/gestures.dart';
 import 'package:flame/parallax.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flame_audio/flame_audio.dart';
+
 import 'package:red_hood_revenge/characters/enemy.dart';
 import 'package:red_hood_revenge/characters/nightBorne.dart';
 import 'package:red_hood_revenge/characters/nightBorne2.dart';
@@ -131,6 +133,7 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
 
   @override
   Future<void> onLoad() async {
+    FlameAudio.bgm.initialize();
     this.parallaxComponent = await loadParallaxComponent(
       [
         ParallaxImageData('Parallax/level0/background_1.png'),
@@ -147,6 +150,7 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
     );
     add(parallaxComponent);
     loadLevel(this.currentLevel);
+    
   }
 
   void pauseGame() {
@@ -154,8 +158,13 @@ class RedHoodGame extends BaseGame with TapDetector, HasCollidables {
     overlays.add(PauseMenu.id);
   }
 
+  void resumeGame(){
+    this.resumeEngine();
+  }
+
   void loadLevel(level) {
     this.shouldLoadZero = false;
+    
     switch (level) {
       case 0:
         this.shouldLoadZero = true;

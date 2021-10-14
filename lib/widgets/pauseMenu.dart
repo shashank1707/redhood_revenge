@@ -37,7 +37,7 @@ class PauseMenu extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: ElevatedButton(
                   onPressed: () {
-                    gameRef.resumeEngine();
+                    gameRef.resumeGame();
                     if(gameRef.currentLevel == 0){
                       gameRef.overlays.add(WarriorHud.id);
                     }else{

@@ -117,7 +117,7 @@ class Hud extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_left_rounded,
                           color: Colors.white,
-                          size: 100,
+                          size: 120,
                         ),
                         onPanDown: (details) {
                           gameRef.redHoodComponent.moveBackward();
@@ -130,7 +130,7 @@ class Hud extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_right_rounded,
                           color: Colors.white,
-                          size: 100,
+                          size: 120,
                         ),
                         onPanDown: (details) {
                           gameRef.redHoodComponent.moveForward();
@@ -141,50 +141,53 @@ class Hud extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        child: Container(
-                          height: width / 10,
-                          width: width / 10,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(width: 3, color: Colors.white),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image.asset(
-                              'assets/icon_images/sword.png',
-                              color: Colors.white,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          child: Container(
+                            height: width / 9,
+                            width: width / 9,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(width: 3, color: Colors.white),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Image.asset(
+                                'assets/icon_images/sword.png',
+                                color: Colors.white,
+                              ),
                             ),
                           ),
+                          onPanDown: (details) {
+                            gameRef.redHoodComponent.attack();
+                          },
                         ),
-                        onPanDown: (details) {
-                          gameRef.redHoodComponent.attack();
-                        },
-                      ),
-                      GestureDetector(
-                        child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 16),
-                          height: width / 15,
-                          width: width / 15,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(width: 3, color: Colors.white),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'assets/icon_images/arrow.png',
-                              color: Colors.white,
+                        GestureDetector(
+                          child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 16),
+                            height: width / 13,
+                            width: width / 13,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(width: 3, color: Colors.white),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                'assets/icon_images/arrow.png',
+                                color: Colors.white,
+                              ),
                             ),
                           ),
+                          onPanDown: (details) {
+                            gameRef.redHoodComponent.jump();
+                          },
                         ),
-                        onPanDown: (details) {
-                          gameRef.redHoodComponent.jump();
-                        },
-                      ),
-                    ],
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -293,7 +296,7 @@ class WarriorHud extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_left_rounded,
                           color: Colors.white,
-                          size: 100,
+                          size: 120,
                         ),
                         onPanDown: (details) {
                           gameRef.warriorComponent.moveBackward();
@@ -306,7 +309,7 @@ class WarriorHud extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_right_rounded,
                           color: Colors.white,
-                          size: 100,
+                          size: 120,
                         ),
                         onPanDown: (details) {
                           gameRef.warriorComponent.moveForward();
@@ -317,50 +320,53 @@ class WarriorHud extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        child: Container(
-                          height: width / 10,
-                          width: width / 10,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(width: 3, color: Colors.white),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image.asset(
-                              'assets/icon_images/sword.png',
-                              color: Colors.white,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          child: Container(
+                            height: width / 9,
+                            width: width / 9,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(width: 3, color: Colors.white),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Image.asset(
+                                'assets/icon_images/sword.png',
+                                color: Colors.white,
+                              ),
                             ),
                           ),
+                          onPanDown: (details) {
+                            gameRef.warriorComponent.attack();
+                          },
                         ),
-                        onPanDown: (details) {
-                          gameRef.warriorComponent.attack();
-                        },
-                      ),
-                      GestureDetector(
-                        child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 16),
-                          height: width / 15,
-                          width: width / 15,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(width: 3, color: Colors.white),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'assets/icon_images/arrow.png',
-                              color: Colors.white,
+                        GestureDetector(
+                          child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 16),
+                            height: width / 13,
+                            width: width / 13,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(width: 3, color: Colors.white),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                'assets/icon_images/arrow.png',
+                                color: Colors.white,
+                              ),
                             ),
                           ),
+                          onPanDown: (details) {
+                            gameRef.warriorComponent.jump();
+                          },
                         ),
-                        onPanDown: (details) {
-                          gameRef.warriorComponent.jump();
-                        },
-                      ),
-                    ],
+                      ],
+                    ),
                   )
                 ],
               ),

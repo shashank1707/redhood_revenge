@@ -27,7 +27,7 @@ class _DialoguesSet8State extends State<DialoguesSet8> {
 
   List<Map<String, String>> dialogueList = [
     {"character": "Redhood", "dialogue": "(Grunts) AHH!! What's happening? I can't move."},
-    {"character": "Wizard", "dialogue": "It must be the potion. Each and every one of your organs is frozen in its place, except for your head of course."},
+    {"character": "NightBorne", "dialogue": "HAHA!... You still don't know anything about the potions. No potion is perfect. This is the side effects of the potion you just took. Each and every one of your organs is frozen in its place, except for your head, of course."},
     {"character": "NightBorne", "dialogue": "You're not a bad fighter for a girl, kid. But now that I'm about to end your life, tell me - why did you come here tonight?"},
     {"character": "Redhood", "dialogue": "I'm your worst nightmare."},
     {"character": "NightBorne", "dialogue": "Too Bad! I don't have nightmares. I create them."},
@@ -37,7 +37,8 @@ class _DialoguesSet8State extends State<DialoguesSet8> {
     {"character": "NightBorne", "dialogue": "HE IS the reason I'm so powerful today."},
     {"character": "Redhood", "dialogue": "WHAT? But I- The potions-"},
     {"character": "NightBorne", "dialogue": "Ahh Yes, the potions. Thanks to you, he will now rule this planet."},
-    {"character": "NightBorne", "dialogue": "I've heard this potion is detrimental, it messes up your brain - You forget who you are, you forget where you belong, you forget why you exist."},
+    {"character": "NightBorne", "dialogue": "He will combine those potions to create an Ultimate Potion. The potion will give him the power to get control over everyone's mind and soul."},
+    {"character": "NightBorne", "dialogue": "This power is detrimental, it messes up your brain - You forget who you are, you forget where you belong, you forget why you exist."},
   ];
 
   @override
